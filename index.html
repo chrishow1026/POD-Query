@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,6 +111,7 @@
       text-decoration: none;
       text-align: center;
 
+      cursor: pointer;
       transition: all 0.2s;
     }
 
@@ -121,17 +123,50 @@
     }
 
     /* =========================
+       FORM BUTTON
+    ========================= */
+
+    .form-btn {
+      display: block;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 12px;
+      padding: 22px 20px;
+      margin: 16px 0;
+
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+
+      text-decoration: none;
+      text-align: center;
+
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .form-btn:hover {
+      border-color: #3370ff;
+      color: #3370ff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* =========================
        DISABLED / NO LINK
     ========================= */
 
-    .month-btn.disabled {
+    .month-btn.disabled,
+    .form-btn.disabled {
       background: #eeeeee;
       color: #999;
       border-color: #ddd;
       cursor: not-allowed;
     }
 
-    .month-btn.disabled:hover {
+    .month-btn.disabled:hover,
+    .form-btn.disabled:hover {
       transform: none;
       box-shadow: none;
       color: #999;
@@ -181,6 +216,10 @@
 
       .month-btn {
         padding: 17px 16px;
+      }
+
+      .form-btn {
+        padding: 20px 16px;
       }
 
     }
@@ -266,56 +305,175 @@
 
     </div>
 
+
+    <!-- =====================================================
+         PAGE 4 - FORM SELECTION
+    ====================================================== -->
+
+    <div id="form-page" class="page">
+
+      <a
+        class="back-btn"
+        onclick="goBackToMonth()">
+        ← Back
+      </a>
+
+      <div class="section-title" id="form-page-title">
+        Select Form
+      </div>
+
+      <div id="form-options"></div>
+
+    </div>
+
   </div>
 
 
   <script>
 
     /* =====================================================
-       POD LINK CONFIGURATION
+       FORM LINK CONFIGURATION
 
        >>> ONLY EDIT THIS SECTION <<<
 
-       Put your Lark Base / Form URL here.
+       Each month can have:
 
-       If a month does not have a URL yet,
+       form1 = First Lark Form
+       form2 = Second Lark Form
+
+       If a form does not exist yet,
        leave it as "".
 
     ====================================================== */
 
-    const POD_LINKS = {
+    const FORM_LINKS = {
 
       KL: {
 
-        January:   "",
-        February:  "",
-        March:     "",
-        April:     "",
-        May:       "",
-        June:      "",
-        July:      "",
-        August:    "",
-        September: "",
-        October:   "",
-        November:  "",
-        December:  ""
+        January: {
+          form1: "",
+          form2: ""
+        },
+
+        February: {
+          form1: "",
+          form2: ""
+        },
+
+        March: {
+          form1: "",
+          form2: ""
+        },
+
+        April: {
+          form1: "",
+          form2: ""
+        },
+
+        May: {
+          form1: "",
+          form2: ""
+        },
+
+        June: {
+          form1: "",
+          form2: ""
+        },
+
+        July: {
+          form1: "",
+          form2: ""
+        },
+
+        August: {
+          form1: "",
+          form2: ""
+        },
+
+        September: {
+          form1: "",
+          form2: ""
+        },
+
+        October: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgkNZmNNqLzjsRi6DrmWaeye",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgNLfELHTXwRg1e0YXIDQW4c"
+        },
+
+        November: {
+          form1: "",
+          form2: ""
+        },
+
+        December: {
+          form1: "",
+          form2: ""
+        }
 
       },
 
+
       Penang: {
 
-        January:   "",
-        February:  "",
-        March:     "",
-        April:     "",
-        May:       "",
-        June:      "",
-        July:      "",
-        August:    "https://bgstrading.sg.larksuite.com/share/base/query/shrlgGZzFmD3NwX6t7sH7rqF36Q",
-        September: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgAon28XcwO6vUTvi7C5PSNc",
-        October:   "",
-        November:  "",
-        December:  ""
+        January: {
+          form1: "",
+          form2: ""
+        },
+
+        February: {
+          form1: "",
+          form2: ""
+        },
+
+        March: {
+          form1: "",
+          form2: ""
+        },
+
+        April: {
+          form1: "",
+          form2: ""
+        },
+
+        May: {
+          form1: "",
+          form2: ""
+        },
+
+        June: {
+          form1: "",
+          form2: ""
+        },
+
+        July: {
+          form1: "",
+          form2: ""
+        },
+
+        August: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgGZzFmD3NwX6t7sH7rqF36Q",
+          form2: ""
+        },
+
+        September: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgAon28XcwO6vUTvi7C5PSNc",
+          form2: ""
+        },
+
+        October: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgXJRJHvbdDKKgdL4DScGgjc",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgJIiY5QL7bTcbJCouXvcICh"
+        },
+
+        November: {
+          form1: "",
+          form2: ""
+        },
+
+        December: {
+          form1: "",
+          form2: ""
+        }
 
       }
 
@@ -324,22 +482,36 @@
 
     /* =====================================================
        MONTH LIST
+
+       September and August are placed first.
     ====================================================== */
 
     const MONTHS = [
+    "October",  
     "September",
-  "August",
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "October",
-  "November",
-  "December"
-];
+      "August",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      
+      "November",
+      "December"
+    ];
+
+
+    /* =====================================================
+       CURRENT SELECTION
+
+       Used to remember which location/month
+       the user selected.
+    ====================================================== */
+
+    let selectedLocation = "";
+    let selectedMonth = "";
 
 
     /* =====================================================
@@ -357,29 +529,55 @@
 
       MONTHS.forEach(function(month) {
 
-        const url = POD_LINKS[location][month];
+        const forms =
+          FORM_LINKS[location][month];
 
-        const button = document.createElement("a");
+        const button =
+          document.createElement("a");
 
         button.className = "month-btn";
 
-        button.textContent = month + " 2026";
+        button.textContent =
+          month + " 2026";
 
 
-        /* If URL exists */
+        /*
+         * Check whether this month
+         * has at least one form.
+         */
 
-        if (url && url.trim() !== "") {
+        const hasForm1 =
+          forms.form1 &&
+          forms.form1.trim() !== "";
 
-          button.href = url;
+        const hasForm2 =
+          forms.form2 &&
+          forms.form2.trim() !== "";
 
-          button.target = "_blank";
 
-          button.rel = "noopener noreferrer";
+        /*
+         * If at least one form exists,
+         * allow user to enter Form Selection page.
+         */
+
+        if (hasForm1 || hasForm2) {
+
+          button.onclick = function() {
+
+            selectedLocation = location;
+            selectedMonth = month;
+
+            showFormPage();
+
+          };
 
         }
 
 
-        /* If URL does not exist */
+        /*
+         * If no form exists,
+         * show Coming Soon.
+         */
 
         else {
 
@@ -388,9 +586,12 @@
           button.textContent =
             month + " 2026 - Coming Soon";
 
-          button.onclick = function(event) {
-            event.preventDefault();
-          };
+          button.onclick =
+            function(event) {
+
+              event.preventDefault();
+
+            };
 
         }
 
@@ -398,6 +599,120 @@
         container.appendChild(button);
 
       });
+
+    }
+
+
+    /* =====================================================
+       SHOW FORM SELECTION PAGE
+    ====================================================== */
+
+    function showFormPage() {
+
+      const title =
+        document.getElementById("form-page-title");
+
+      title.textContent =
+        selectedLocation +
+        " - " +
+        selectedMonth +
+        " 2026";
+
+
+      const container =
+        document.getElementById("form-options");
+
+      container.innerHTML = "";
+
+
+      const forms =
+        FORM_LINKS[selectedLocation][selectedMonth];
+
+
+      /*
+       * FORM 1
+       */
+
+      if (
+        forms.form1 &&
+        forms.form1.trim() !== ""
+      ) {
+
+        const form1 =
+          document.createElement("a");
+
+        form1.className = "form-btn";
+
+        form1.textContent =
+          "Out of Delivery Page";
+
+        form1.href =
+          forms.form1;
+
+        form1.target =
+          "_blank";
+
+        form1.rel =
+          "noopener noreferrer";
+
+        container.appendChild(form1);
+
+      }
+
+
+      /*
+       * FORM 2
+       */
+
+      if (
+        forms.form2 &&
+        forms.form2.trim() !== ""
+      ) {
+
+        const form2 =
+          document.createElement("a");
+
+        form2.className = "form-btn";
+
+        form2.textContent =
+          "Proof of Delivery Page";
+
+        form2.href =
+          forms.form2;
+
+        form2.target =
+          "_blank";
+
+        form2.rel =
+          "noopener noreferrer";
+
+        container.appendChild(form2);
+
+      }
+
+
+      showPage("form-page");
+
+    }
+
+
+    /* =====================================================
+       BACK TO MONTH PAGE
+    ====================================================== */
+
+    function goBackToMonth() {
+
+      if (selectedLocation === "KL") {
+
+        showPage("kl-page");
+
+      }
+
+      else if (selectedLocation === "Penang") {
+
+        showPage("penang-page");
+
+      }
 
     }
 
@@ -443,3 +758,4 @@
 
 </body>
 </html>
+```
