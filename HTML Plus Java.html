@@ -1,0 +1,761 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>POD Query Page</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f5f6f7;
+      color: #333;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+      background: #3370ff;
+      color: #fff;
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       MAIN CONTAINER
+    ========================= */
+
+    .wrap {
+      max-width: 520px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    /* =========================
+       LOCATION BUTTON
+    ========================= */
+
+    .location-btn {
+      display: block;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 12px;
+      padding: 24px 20px;
+      margin: 16px 0;
+
+      font-size: 19px;
+      font-weight: 600;
+      color: #333;
+
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .location-btn:hover {
+      border-color: #3370ff;
+      color: #3370ff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* =========================
+       MONTH BUTTON
+    ========================= */
+
+    .month-btn {
+      display: block;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 12px 0;
+
+      font-size: 16px;
+      color: #333;
+      text-decoration: none;
+      text-align: center;
+
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .month-btn:hover {
+      border-color: #3370ff;
+      color: #3370ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* =========================
+       FORM BUTTON
+    ========================= */
+
+    .form-btn {
+      display: block;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 12px;
+      padding: 22px 20px;
+      margin: 16px 0;
+
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+
+      text-decoration: none;
+      text-align: center;
+
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .form-btn:hover {
+      border-color: #3370ff;
+      color: #3370ff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* =========================
+       DISABLED / NO LINK
+    ========================= */
+
+    .month-btn.disabled,
+    .form-btn.disabled {
+      background: #eeeeee;
+      color: #999;
+      border-color: #ddd;
+      cursor: not-allowed;
+    }
+
+    .month-btn.disabled:hover,
+    .form-btn.disabled:hover {
+      transform: none;
+      box-shadow: none;
+      color: #999;
+      border-color: #ddd;
+    }
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 18px;
+
+      color: #3370ff;
+      font-size: 15px;
+      text-decoration: none;
+
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .header {
+        padding: 24px 16px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .wrap {
+        margin-top: 24px;
+      }
+
+      .location-btn {
+        padding: 22px 16px;
+      }
+
+      .month-btn {
+        padding: 17px 16px;
+      }
+
+      .form-btn {
+        padding: 20px 16px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <div class="header">
+    <h1>POD Query Page</h1>
+  </div>
+
+
+  <div class="wrap">
+
+    <!-- =====================================================
+         PAGE 1 - LOCATION SELECTION
+    ====================================================== -->
+
+    <div id="main-page" class="page active">
+
+      <div class="section-title">
+        Select Location
+      </div>
+
+      <button
+        class="location-btn"
+        onclick="showPage('kl-page')">
+        KL
+      </button>
+
+      <button
+        class="location-btn"
+        onclick="showPage('penang-page')">
+        Penang
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAGE 2 - KL
+    ====================================================== -->
+
+    <div id="kl-page" class="page">
+
+      <a
+        class="back-btn"
+        onclick="showPage('main-page')">
+        ← Back
+      </a>
+
+      <div class="section-title">
+        KL - Select Month
+      </div>
+
+      <div id="kl-months"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAGE 3 - PENANG
+    ====================================================== -->
+
+    <div id="penang-page" class="page">
+
+      <a
+        class="back-btn"
+        onclick="showPage('main-page')">
+        ← Back
+      </a>
+
+      <div class="section-title">
+        Penang - Select Month
+      </div>
+
+      <div id="penang-months"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PAGE 4 - FORM SELECTION
+    ====================================================== -->
+
+    <div id="form-page" class="page">
+
+      <a
+        class="back-btn"
+        onclick="goBackToMonth()">
+        ← Back
+      </a>
+
+      <div class="section-title" id="form-page-title">
+        Select Form
+      </div>
+
+      <div id="form-options"></div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       FORM LINK CONFIGURATION
+
+       >>> ONLY EDIT THIS SECTION <<<
+
+       Each month can have:
+
+       form1 = First Lark Form
+       form2 = Second Lark Form
+
+       If a form does not exist yet,
+       leave it as "".
+
+    ====================================================== */
+
+    const FORM_LINKS = {
+
+      KL: {
+
+        January: {
+          form1: "",
+          form2: ""
+        },
+
+        February: {
+          form1: "",
+          form2: ""
+        },
+
+        March: {
+          form1: "",
+          form2: ""
+        },
+
+        April: {
+          form1: "",
+          form2: ""
+        },
+
+        May: {
+          form1: "",
+          form2: ""
+        },
+
+        June: {
+          form1: "",
+          form2: ""
+        },
+
+        July: {
+          form1: "",
+          form2: ""
+        },
+
+        August: {
+          form1: "",
+          form2: ""
+        },
+
+        September: {
+          form1: "",
+          form2: ""
+        },
+
+        October: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgkNZmNNqLzjsRi6DrmWaeye",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgNLfELHTXwRg1e0YXIDQW4c"
+        },
+
+        November: {
+          form1: "",
+          form2: ""
+        },
+
+        December: {
+          form1: "",
+          form2: ""
+        }
+
+      },
+
+
+      Penang: {
+
+        January: {
+          form1: "",
+          form2: ""
+        },
+
+        February: {
+          form1: "",
+          form2: ""
+        },
+
+        March: {
+          form1: "",
+          form2: ""
+        },
+
+        April: {
+          form1: "",
+          form2: ""
+        },
+
+        May: {
+          form1: "",
+          form2: ""
+        },
+
+        June: {
+          form1: "",
+          form2: ""
+        },
+
+        July: {
+          form1: "",
+          form2: ""
+        },
+
+        August: {
+          form1: "",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgGZzFmD3NwX6t7sH7rqF36Q"
+        },
+
+        September: {
+          form1: "",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgAon28XcwO6vUTvi7C5PSNc"
+        },
+
+        October: {
+          form1: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgXJRJHvbdDKKgdL4DScGgjc",
+          form2: "https://bgstrading.sg.larksuite.com/share/base/query/shrlgJIiY5QL7bTcbJCouXvcICh"
+        },
+
+        November: {
+          form1: "",
+          form2: ""
+        },
+
+        December: {
+          form1: "",
+          form2: ""
+        }
+
+      }
+
+    };
+
+
+    /* =====================================================
+       MONTH LIST
+
+       September and August are placed first.
+    ====================================================== */
+
+    const MONTHS = [
+    "October",  
+    "September",
+      "August",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      
+      "November",
+      "December"
+    ];
+
+
+    /* =====================================================
+       CURRENT SELECTION
+
+       Used to remember which location/month
+       the user selected.
+    ====================================================== */
+
+    let selectedLocation = "";
+    let selectedMonth = "";
+
+
+    /* =====================================================
+       CREATE MONTH BUTTONS
+    ====================================================== */
+
+    function createMonthButtons(location) {
+
+      const container =
+        document.getElementById(
+          location.toLowerCase() + "-months"
+        );
+
+      container.innerHTML = "";
+
+      MONTHS.forEach(function(month) {
+
+        const forms =
+          FORM_LINKS[location][month];
+
+        const button =
+          document.createElement("a");
+
+        button.className = "month-btn";
+
+        button.textContent =
+          month + " 2026";
+
+
+        /*
+         * Check whether this month
+         * has at least one form.
+         */
+
+        const hasForm1 =
+          forms.form1 &&
+          forms.form1.trim() !== "";
+
+        const hasForm2 =
+          forms.form2 &&
+          forms.form2.trim() !== "";
+
+
+        /*
+         * If at least one form exists,
+         * allow user to enter Form Selection page.
+         */
+
+        if (hasForm1 || hasForm2) {
+
+          button.onclick = function() {
+
+            selectedLocation = location;
+            selectedMonth = month;
+
+            showFormPage();
+
+          };
+
+        }
+
+
+        /*
+         * If no form exists,
+         * show Coming Soon.
+         */
+
+        else {
+
+          button.classList.add("disabled");
+
+          button.textContent =
+            month + " 2026 - Coming Soon";
+
+          button.onclick =
+            function(event) {
+
+              event.preventDefault();
+
+            };
+
+        }
+
+
+        container.appendChild(button);
+
+      });
+
+    }
+
+
+    /* =====================================================
+       SHOW FORM SELECTION PAGE
+    ====================================================== */
+
+    function showFormPage() {
+
+      const title =
+        document.getElementById("form-page-title");
+
+      title.textContent =
+        selectedLocation +
+        " - " +
+        selectedMonth +
+        " 2026";
+
+
+      const container =
+        document.getElementById("form-options");
+
+      container.innerHTML = "";
+
+
+      const forms =
+        FORM_LINKS[selectedLocation][selectedMonth];
+
+
+      /*
+       * FORM 1
+       */
+
+      if (
+        forms.form1 &&
+        forms.form1.trim() !== ""
+      ) {
+
+        const form1 =
+          document.createElement("a");
+
+        form1.className = "form-btn";
+
+        form1.textContent =
+          "Out of Delivery Page";
+
+        form1.href =
+          forms.form1;
+
+        form1.target =
+          "_blank";
+
+        form1.rel =
+          "noopener noreferrer";
+
+        container.appendChild(form1);
+
+      }
+
+
+      /*
+       * FORM 2
+       */
+
+      if (
+        forms.form2 &&
+        forms.form2.trim() !== ""
+      ) {
+
+        const form2 =
+          document.createElement("a");
+
+        form2.className = "form-btn";
+
+        form2.textContent =
+          "Proof of Delivery Page";
+
+        form2.href =
+          forms.form2;
+
+        form2.target =
+          "_blank";
+
+        form2.rel =
+          "noopener noreferrer";
+
+        container.appendChild(form2);
+
+      }
+
+
+      showPage("form-page");
+
+    }
+
+
+    /* =====================================================
+       BACK TO MONTH PAGE
+    ====================================================== */
+
+    function goBackToMonth() {
+
+      if (selectedLocation === "KL") {
+
+        showPage("kl-page");
+
+      }
+
+      else if (selectedLocation === "Penang") {
+
+        showPage("penang-page");
+
+      }
+
+    }
+
+
+    /* =====================================================
+       PAGE NAVIGATION
+    ====================================================== */
+
+    function showPage(pageId) {
+
+      const pages =
+        document.querySelectorAll(".page");
+
+      pages.forEach(function(page) {
+
+        page.classList.remove("active");
+
+      });
+
+
+      document
+        .getElementById(pageId)
+        .classList.add("active");
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =====================================================
+       INITIALIZE
+    ====================================================== */
+
+    createMonthButtons("KL");
+
+    createMonthButtons("Penang");
+
+  </script>
+
+</body>
+</html>
+```
